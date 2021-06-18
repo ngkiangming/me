@@ -57,7 +57,7 @@ def loops_1c(number_of_items=5, symbol="#"):
     E.g.: ['#', '#', '#', '#', '#']
     """
     list = []
-    for i in range(5):
+    for i in range(number_of_items):
         list.append(symbol)
     return list
 
@@ -139,7 +139,7 @@ def loops_4():
     list = []
     final_list = []
     for i in range(10):
-        list.append(i)
+        list.append(str(i))
     for j in range(10):
         final_list.append(list)
     return final_list
@@ -173,7 +173,7 @@ def loops_5():
     for i in range(10):
         list = []
         for j in range(5):
-            list.append("(i" + str(i) + ",j" + str(j) + ")")
+            list.append("(i" + str(i) + ", j" + str(j) + ")")
         final_list.append(list)
     return final_list
 
@@ -202,7 +202,7 @@ def loops_6():
     for i in range(10):
         list = []
         for j in range(i + 1):
-            list.append(j)
+            list.append(str(j))
         final_list.append(list)
     return final_list
 
@@ -235,6 +235,8 @@ def loops_7():
             list.append(" ")
         for k in range(1, 2 * i):
             list.append("*")
+        for l in range(1, 6 - i):
+            list.append(" ")
         final_list.append(list)
     return final_list
 
