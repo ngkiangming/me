@@ -60,9 +60,6 @@ def advancedGuessingGame():
                 print("Outside the bounds")
         except Exception as e:
             print("Try again ({})".format(e))
-        # except ValueError:
-        #     print("Try again, enter a number instead")
-
     # the tests are looking for the exact string "You got it!". Don't modify that!
 
 
