@@ -18,19 +18,21 @@ def exampleGuessingGame():
     print("OK then, a number between 0 and {} ?".format(upperBound))
     upperBound = int(upperBound)
 
-    actualNumber = random.randint(0, upperBound)
+    actualNumber = random.randint(0, upperBound)  # random number
 
-    guessed = False
+    guessed = False  # wrong answer
 
     while not guessed:
         guessedNumber = int(input("Guess a number: "))
-        print("You guessed {},".format(guessedNumber),)
+        print(
+            "You guessed {},".format(guessedNumber),
+        )
         if guessedNumber == actualNumber:
             print("You got it!! It was {}".format(actualNumber))
             guessed = True
-        elif guessedNumber < actualNumber:
+        elif guessedNumber < actualNumber:  # small number
             print("Too small, try again :'(")
-        else:
+        else:  # big number
             print("Too big, try again :'(")
     return "You got it!"
 
