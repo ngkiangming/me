@@ -1,1 +1,1 @@
-TODO: Reflect on what you learned this week and what is still unclear.
+Review the last 4 questions
