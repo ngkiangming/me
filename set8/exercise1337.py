@@ -194,17 +194,17 @@ def best_letter_for_pets() -> str:
     """
     import string
 
-    second_list = []
-
     the_alphabet = string.ascii_lowercase
 
-    second_list.append(pet_filter())
-
-    number_of_letter = 0
     most_popular_letter = ""
-    for i in second_list:
-        if the_alphabet in i:
-            most_popular_letter = the_alphabet
+
+    x = 0
+
+    for letter in the_alphabet:
+        number_of_letter = len(pet_filter(letter))
+        if number_of_letter > x:
+            x = number_of_letter
+            most_popular_letter = letter
 
     return most_popular_letter
 
@@ -233,12 +233,18 @@ def make_filler_text_dictionary() -> Dict:
     (i.e. 3, 4, 5, 6, 7 and 4 words for each)
     TIP: you'll need the requests library
     """
+    import requests
 
-    url = "https://us-central1-waldenpondpress.cloudfunctions.net/give_me_a_word?wordlength="
-    r = requests.get(url)
-    wd = []
-    word = r.text
-    wd.append(word)
+    for x in range(3, 8):
+        url = (
+            "https://us-central1-waldenpondpress.cloudfunctions.net/give_me_a_word?wordlength="
+            f"{x}"
+        )
+        r = requests.get(url)
+        word = r.text
+        empty_list.append(word)
+
+    wd = {x: empty_list}
 
     return wd
 
