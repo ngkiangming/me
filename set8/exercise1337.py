@@ -235,16 +235,19 @@ def make_filler_text_dictionary() -> Dict:
     """
     import requests
 
-    for x in range(3, 8):
-        url = (
-            "https://us-central1-waldenpondpress.cloudfunctions.net/give_me_a_word?wordlength="
-            f"{x}"
-        )
-        r = requests.get(url)
-        word = r.text
-        empty_list.append(word)
+    wd = {}
 
-    wd = {x: empty_list}
+    for x in range(3, 8):
+        count = 0
+        number = 4
+        wd[x] = []
+        while count != number:
+            r = requests.get(
+                "https://us-central1-waldenpondpress.cloudfunctions.net/give_me_a_word?wordlength="
+                + str(x)
+            )
+            wd[x].append(r.text)
+            count = count + 1
 
     return wd
 
@@ -259,10 +262,17 @@ def random_filler_text(number_of_words=200) -> str:
     TIP: you'll need the random library,
         e.g. random.randint(low, high)
     """
+    import random
 
     my_dict = make_filler_text_dictionary()
 
     words = []
+
+    count = 0
+
+    while count != number_of_words:
+        words.append(my_dict[random.randint(3, 5)][random.randint(0, 3)])
+        count = count + 1
 
     return " ".join(words)
 
@@ -281,10 +291,34 @@ def fast_filler(number_of_words=200) -> str:
     it'll convert integer keys to strings.
     If you get this one to work, you are a Very Good Programmer™!
     """
+    import random
+    import os
+    import json
 
     fname = "dict_cache.json"
 
-    return None
+    if os.path.isfile(fname):
+        with open(fname, "r", encoding="utf=8") as gc:
+            my_dict = json.load(gc)
+    else:
+        my_dict = make_filler_text_dictionary()
+        with open(fname, "w", encoding="utf=8") as f:
+            json.dump(my_dict, f)
+
+    empty_list = []
+
+    count = 0
+
+    while count != number_of_words:
+        count = count + 1
+        try:
+            empty_list.append(my_dict[random.randint(3, 5)][random.randint(0, 3)])
+        except KeyError:
+            empty_list.append(my_dict[str(random.randint(3, 5))][random.randint(0, 3)])
+
+    answer = " ".join(empty_list)
+
+    return answer[0].upper() + answer[1:] + "."
 
 
 if __name__ == "__main__":
